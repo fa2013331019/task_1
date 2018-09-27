@@ -1,10 +1,10 @@
 # Task_1
 My approach to solve Task 1 is as follows.
 
-First step:
+# First step:
 First I analyzed the structure of "bdjobs.com". There is almost 200 pages in this website. Each of those page contains 20 jobs. These 200 pages might be found by scraping the "next" links in the webpage. And when one page is found then the 20 job links containing that single page can be found. Using those links it is possible to extract information from those job postings.
 
-Second step:
+# Second step:
 Then I selected the following features to extract.
 1) Title
 2) Category
@@ -18,10 +18,10 @@ Then I selected the following features to extract.
 10) Salary
 11) Job Source
 
-Third step:
+# Third step:
 To implement my solution I wrote two spiders. One spider will crawl the "next page" links and save them in a text file. Another spider will fetch those links as start_urls and run through those job postings to extract feature.
 
-Problem with third step:
+# Problem with third step:
 After writing those two spiders I realized that the "next page" link in every page wasn't actually a page. bdjobs.com is one among those ASP.NET sites which uses javascript buttons to create a form and load data in that form. So I couldn't get those "next page" attributes as links. Those were actually javascript forms.
 
 I took following measures to virtually click on "next page":
@@ -34,12 +34,12 @@ I took following measures to virtually click on "next page":
 
 By this point a signification amount of time in my project completion time span had been elapsed. So I reminded a famous quote from Randy Pausch which was "Engineering isn't about perfect solutions; it's about doing the best you can with limited resources." and I decided to launch a brute force attack on the link patterns.
 
-Fourth Step:
+# Fourth Step:
 Analyzed the link patterns I found that every job has a link in form of "http://jobs.bdjobs.com/jobdetails.asp?id=[int]&fcatId=1&ln=1" where int has a range between 780000 and 799999. So I wrote a spider which iterate a loop in this range to load the start_urls.
 
 By this approach it took 1 hour to crawl informations from job postings. I scraped features from 25000 job posting . Which was about 70% of the crawlable jobs(jobs which don't contain info in image form). Feautures were extracted by analyzing the xpath patterns.
 
-Fifth step:
+# Fifth step:
 Then I organized my .txt file in a json format so that it is easy to analyze and work on this data set. We can load csv from this json array saved in the text file.
 
 An entry in the .txt file named "results" is structured as follows: 
